@@ -339,7 +339,7 @@ if(CONFIG_ARCH_CHIP_ESP32)
 		target_link_libraries(px4 PRIVATE ${module_libraries})
 		if(config_romfs_root)
 			add_subdirectory(${PX4_SOURCE_DIR}/ROMFS ${PX4_BINARY_DIR}/ROMFS)
-			target_link_libraries(px4 PRIVATE romfs)
+			# target_link_libraries(px4 PRIVATE romfs)
 		endif()
 		add_custom_command(OUTPUT ${PX4_BINARY_OUTPUT}
 			COMMAND esptool --chip esp32 elf2image -o ${PX4_BINARY_OUTPUT} ${PX4_BINARY_DIR_REL}/${FW_NAME}
@@ -393,7 +393,7 @@ else()
 
 	if(config_romfs_root)
 		add_subdirectory(${PX4_SOURCE_DIR}/ROMFS ${PX4_BINARY_DIR}/ROMFS)
-		target_link_libraries(px4 PRIVATE romfs)
+		# target_link_libraries(px4 PRIVATE romfs)
 	endif()
 
 	add_custom_command(OUTPUT ${PX4_BINARY_OUTPUT}

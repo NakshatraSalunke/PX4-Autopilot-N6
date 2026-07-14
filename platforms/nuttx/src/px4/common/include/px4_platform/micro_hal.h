@@ -51,6 +51,7 @@ __BEGIN_DECLS
 #define px4_udelay(usec) up_udelay(usec)
 #define px4_mdelay(msec) up_mdelay(msec)
 
+#include <nuttx/irq.h>
 #include <arch/board/board.h>
 
 __END_DECLS

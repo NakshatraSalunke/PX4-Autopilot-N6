@@ -287,9 +287,12 @@ CDev::poll(file_t *filep, px4_pollfd_struct_t *fds, bool setup)
 			 */
 			fds->revents |= fds->events & poll_state(filep);
 
-			/* yes? post the notification */
 			if (fds->revents != 0) {
+#if defined(__PX4_NUTTX)
+				::poll_notify((FAR struct pollfd **)&fds, 1, fds->revents);
+#else
 				px4_sem_post(fds->sem);
+#endif
 			}
 
 		}
@@ -336,7 +339,11 @@ CDev::poll_notify_one(px4_pollfd_struct_t *fds, px4_pollevent_t events)
 	PX4_DEBUG(" Events fds=%p %0x %0x %0x", fds, fds->revents, fds->events, events);
 
 	if (fds->revents != 0) {
+#if defined(__PX4_NUTTX)
+		::poll_notify((FAR struct pollfd **)&fds, 1, fds->revents);
+#else
 		px4_sem_post(fds->sem);
+#endif
 	}
 }
 

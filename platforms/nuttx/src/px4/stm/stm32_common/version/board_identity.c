@@ -41,6 +41,10 @@
 #include <stdio.h>
 #include <string.h>
 
+#ifndef STM32_SYSMEM_UID
+#  define STM32_SYSMEM_UID 0x34000000 /* Dummy value for now */
+#endif
+
 #define CPU_UUID_BYTE_FORMAT_ORDER          {3, 2, 1, 0, 7, 6, 5, 4, 11, 10, 9, 8}
 #define SWAP_UINT32(x) (((x) >> 24) | (((x) & 0x00ff0000) >> 8) | (((x) & 0x0000ff00) << 8) | ((x) << 24))
 

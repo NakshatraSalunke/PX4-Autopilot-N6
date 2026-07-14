@@ -36,9 +36,11 @@
 
 __BEGIN_DECLS
 
+#ifndef CONFIG_ARCH_CHIP_STM32N6
 #include <stm32_tim.h>
 #include <stm32_spi.h>
 #include <stm32_i2c.h>
+#endif
 
 /* STM32/32F7 defines the 96 bit UUID as
  *  init32_t[3] that can be read as bytes/half-words/words

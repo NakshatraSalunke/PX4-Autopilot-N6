@@ -86,6 +86,10 @@ unlink	: nullptr
 
 const cdev::px4_file_operations_t &cdev::CDev::fops_ref() { return g_fops; }
 
+#ifndef FSNODEFLAG_DELETED
+#define FSNODEFLAG_DELETED 0
+#endif
+
 static int
 cdev_open(file_t *filp)
 {

@@ -71,4 +71,9 @@ __EXPORT void cpuload_monitor_stop(void);
 
 __END_DECLS
 
+#else
+__BEGIN_DECLS
+static inline void cpuload_monitor_stop(void) {}
+static inline void cpuload_monitor_start(void) {}
+__END_DECLS
 #endif

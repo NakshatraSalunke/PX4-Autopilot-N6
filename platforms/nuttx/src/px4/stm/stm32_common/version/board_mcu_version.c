@@ -78,6 +78,12 @@ enum MCU_REV {
 
 int board_mcu_version(char *rev, const char **revstr, const char **errata)
 {
+#if defined(CONFIG_ARCH_CHIP_STM32N6)
+	*revstr = "STM32N6xxx";
+	*rev = 'A';
+	if (errata) *errata = NULL;
+	return 0;
+#else
 	uint32_t abc = getreg32(STM32_DEBUGMCU_BASE);
 
 	int32_t chip_version = abc & DEVID_MASK;
@@ -176,4 +182,5 @@ int board_mcu_version(char *rev, const char **revstr, const char **errata)
 	}
 
 	return revid;
+#endif
 }

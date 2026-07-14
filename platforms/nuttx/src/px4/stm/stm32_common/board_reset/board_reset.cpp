@@ -42,7 +42,9 @@
 #include <systemlib/px4_macros.h>
 #include <errno.h>
 #include <stm32_pwr.h>
+#if !defined(CONFIG_ARCH_CHIP_STM32N6)
 #include <stm32_rtc.h>
+#endif
 #include <nuttx/board.h>
 
 #ifdef CONFIG_BOARDCTL_RESET
@@ -78,6 +80,7 @@ int board_configure_reset(reset_mode_e mode, uint32_t arg)
 
 	if (mode < arraySize(modes)) {
 
+#if !defined(CONFIG_ARCH_CHIP_STM32N6)
 		stm32_pwr_enablebkp(true);
 
 		arg = mode == BOARD_RESET_MODE_CAN_BL ? arg & ~0xff : 0;
@@ -90,6 +93,7 @@ int board_configure_reset(reset_mode_e mode, uint32_t arg)
 		*(uint32_t *)STM32_RTC_BK0R = modes[mode] | arg;
 #endif
 		stm32_pwr_enablebkp(false);
+#endif
 		rv = OK;
 	}
 
